@@ -13,6 +13,10 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "eslint": "^8.10.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }
