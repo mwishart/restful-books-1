@@ -11,7 +11,7 @@ import {get, post} from 'axios';
 
 console.log('Success!');
 
-let restServer = 'http://localhost:3000/cars';
+let restServer = 'http://localhost:3000/books';
 
 async function fetchData(url) {
   try {
@@ -20,7 +20,7 @@ async function fetchData(url) {
     if (response.ok) {
       let results = await response.json();
       console.log('Got results:', results);
-      // renderTable(results);
+      renderTable(results);
     } else {
       console.log(`Could not find anything at ${url}`);
     }
@@ -31,17 +31,18 @@ async function fetchData(url) {
 
 function renderTable(books) {
   let tableBody = document.querySelector('#books-container tbody');
-  for(let book of books){
-      let row = document.createElement('tr');
-      row.insertAdjacentHTML(
-          `beforeend`,
-          `
-          <td>${book.title}</td>
-          <td>${book.author}</td>
-        <td> ${book.year} </td>
-          `
-      );
-      rows.push(row);
+  let rows = [];
+  for (let book of books) {
+    let row = document.createElement('tr');
+    row.insertAdjacentHTML(
+      `beforeend`,
+      `
+    <td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.year}</td>
+    `
+    );
+    rows.push(row);
   }
   tableBody.append(...rows);
 }
