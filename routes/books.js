@@ -20,12 +20,7 @@ const books = [
 
 // GET /books/ -> [ array of books ]
 router.get('/', (req, res) => {
-  let bookList = '';
-  for (let book of books) {
-    // bookList += `${book.title} by ${book.author}<br>`;
-    bookList = bookList + `${book.title} by ${book.author}<br>`;
-  }
-  res.send(`Here's an array of books: ${bookList}`);
+  res.json(books);
 });
 
 router.get('/gatsby', (req, res) => {
