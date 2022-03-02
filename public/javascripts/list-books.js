@@ -31,6 +31,19 @@ async function fetchData(url) {
 
 function renderTable(books) {
   let tableBody = document.querySelector('#books-container tbody');
+  for(let book of books){
+      let row = document.createElement('tr');
+      row.insertAdjacentHTML(
+          `beforeend`,
+          `
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+        <td> ${book.year} </td>
+          `
+      );
+      rows.push(row);
+  }
+  tableBody.append(...rows);
 }
 
 fetchData(restServer);
