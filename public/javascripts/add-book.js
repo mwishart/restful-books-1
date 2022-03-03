@@ -1,8 +1,10 @@
+import { restServer } from './config.js';
 let form = document.querySelector('#add-book-form');
-let restServer = 'http://localhost:3000/books';
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+  let submitButton = form.querySelector('[type=submit]');
+  submitButton.disabled = true;
   let bookFormData = new FormData(form);
   let book = {};
   for (let [key, value] of bookFormData.entries()) {
@@ -21,7 +23,16 @@ form.addEventListener('submit', (event) => {
         console.log('Bad response? ', response);
       }
     })
-    .then((results) => console.log(`Added book with id ${results.id}`));
+    .then((results) => {
+      console.log(`Added book with id ${results.id}`);
+      let notifyElement = document.querySelector('#notifications');
+      let message = document.createElement('p');
+      message.classList.add('notification-fade');
+      message.textContent = `Added book with id ${results.id}`;
+      notifyElement.replaceChildren(message);
+      setTimeout(() => message.classList.add('hidden'), 500);
+      submitButton.disabled = false;
+    });
 });
 
 export {};
