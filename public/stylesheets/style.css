@@ -1,8 +1,8 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.notification-fade {
+  transition: visibility 0s 2s, opacity 2s linear;
 }
 
-a {
-  color: #00B7FF;
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }

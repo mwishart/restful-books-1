@@ -9,9 +9,7 @@ import {get, post} from 'axios';
 3) Use Webpack
 */
 
-console.log('Success!');
-
-let restServer = 'http://localhost:3000/books';
+import { restServer } from './config.js';
 
 async function fetchData(url) {
   try {

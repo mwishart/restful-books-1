@@ -1,26 +1,24 @@
 var express = require('express');
 var router = express.Router();
+let dao = {};
 
-const books = [
-  {
-    id: '1',
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    authorId: '1',
-    year: 1925,
-  },
-  {
-    id: '2',
-    title: 'Clifford, the Big Red Dog',
-    author: 'Norman Bridwell',
-    authorId: '2',
-    year: 1963,
-  },
-];
+(async () => {
+  const module = await import('../persistence/lowdb-persistence.mjs');
+  dao = module.dao;
+})();
 
 // GET /books/ -> [ array of books ]
 router.get('/', (req, res) => {
-  res.json(books);
+  res.json(dao.findBooks());
+});
+
+router.post('/', async (req, res) => {
+  // title, author, year, no ids
+  console.log('req.body:', req.body);
+  let bookProto = req.body;
+
+  let resultsBook = await dao.addBook(bookProto);
+  res.json(resultsBook);
 });
 
 router.get('/gatsby', (req, res) => {
