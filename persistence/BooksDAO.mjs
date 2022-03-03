@@ -1,5 +1,16 @@
 import { Low } from 'lowdb';
 import * as lodash from 'lodash-es';
+import { nanoid } from 'nanoid';
+
+/**
+ * @typedef {Object} Book
+ *   @property {string} id
+ *   @property {string} title
+ *   @property {string} author
+ *   @property {string} authorId
+ *   @property {number} year
+ *
+ */
 
 /**
  * @extends {Low}
@@ -30,7 +41,7 @@ export class BooksDAO {
    *
    * @param {'books'|'authors'} collection
    * @param {object} criteria
-   * @returns object
+   * @returns {Book}
    */
   find(collection = 'books', criteria) {
     if (!criteria) {
@@ -45,7 +56,7 @@ export class BooksDAO {
    * @param {'books'|'authors'} collection
    * @param {object} criteria
    * @param {boolean} partial
-   * @returns {object[]}
+   * @returns {Book[]}
    * @see {@link https://lodash.com/docs/4.17.15#matches}
    */
   findAll(collection = 'books', criteria, partial = false) {
@@ -82,14 +93,45 @@ export class BooksDAO {
     }
   }
 
+  /**
+   *
+   * @param {object} criteria
+   * @param {boolean} partial
+   * @returns {Book[]}
+   */
   findBooks(criteria, partial = false) {
     return this.findAll('books', criteria, partial);
   }
 
+  /**
+   *
+   * @param {number | string} id
+   * @returns {Book}
+   */
   findBookById(id) {
     if (typeof id !== 'string') {
       id = String(id);
     }
     return this.#db.chain.get('books').find({ id }).value();
+  }
+
+  /**
+   * Add a book to the collection
+   * Note that currently tries to write the file with the new information
+   * and returns false if that fails
+   * @param {Book} book
+   * @returns {Book | null}
+   */
+  async addBook(book) {
+    let bookToBeAdded = { ...book };
+    bookToBeAdded.id = nanoid();
+    this.#db.data.books.push(bookToBeAdded);
+    try {
+      await this.#db.write();
+      return this.#db.chain.get('books').find({ id: bookToBeAdded.id }).value();
+    } catch (error) {
+      console.error('Could not write to database:', error);
+      return null;
+    }
   }
 }

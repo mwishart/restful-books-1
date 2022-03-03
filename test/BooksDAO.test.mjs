@@ -70,4 +70,31 @@ describe('BooksDAO Tests', () => {
     expect(bookResults.length).to.equal(1);
     expect(bookResults[0]).to.deep.equal(testData.books[1]);
   });
+
+  it('addBook() should add a book', async () => {
+    let initialBooks = dao.findBooks();
+    expect(initialBooks.length).to.equal(testData.books.length);
+    let bookToAdd = {
+      title: 'Test Book',
+      author: 'Test author',
+      authorId: 3,
+      year: 2022,
+    };
+    let addedBook = await dao.addBook(bookToAdd);
+    let bookResults = dao.findBooks();
+    expect(bookResults.length).to.equal(3);
+    expect(addedBook).not.to.be.null;
+  });
+
+  it('addBook() should provide an ID', async () => {
+    let bookToAdd = {
+      title: 'Test Book',
+      author: 'Test author',
+      authorId: 3,
+      year: 2022,
+    };
+    let addResult = await dao.addBook(bookToAdd);
+    expect(addResult.id).not.to.be.null;
+    expect(addResult.id.length).to.be.greaterThanOrEqual(10);
+  });
 });
