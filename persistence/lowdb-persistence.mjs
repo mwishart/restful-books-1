@@ -1,20 +1,15 @@
 import { join, dirname } from 'path';
-import { Low, JSONFile } from 'lowdb';
+import { JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
-import * as lodash from 'lodash-es';
+import { BooksDAO } from './BooksDAO.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const filename = 'books.json';
 
-class LowWithLodash extends Low {
-  chain = lodash.chain(this).get('data');
-}
-
 // Use JSON file for storage
 const file = join(__dirname, filename);
 const adapter = new JSONFile(file);
-const db = new LowWithLodash(adapter);
+const dao = new BooksDAO(adapter);
 
-await db.read();
-
-db.data ||= { books: [], authors: [] };
+await dao.read();
+export { dao };
