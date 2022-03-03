@@ -12,13 +12,13 @@ router.get('/', (req, res) => {
   res.json(dao.findBooks());
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // title, author, year, no ids
   console.log('req.body:', req.body);
   let bookProto = req.body;
 
-  dao.addBook(bookProto);
-  res.json(bookProto);
+  let resultsBook = await dao.addBook(bookProto);
+  res.json(resultsBook);
 });
 
 router.get('/gatsby', (req, res) => {
