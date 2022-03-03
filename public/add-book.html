@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,23 @@
   <link rel="stylesheet" href="stylesheets/bootstrap.css">
   <title>Add a Book</title>
 </head>
+
 <body>
   <main class="container">
     <header>
       <h1>Add a book</h1>
       <hr>
     </header>
+    <nav class="row">
+      <div class="col">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="index.html">Home</a></li>
+          <li class="list-inline-item"><a href="list-books.html">List Books</a></li>
+          <li class="list-inline-item">Add a book</li>
+          <li class="list-inline-item"><a href="edit-book.html">Edit a book</a></li>
+        </ul>
+      </div>
+    </nav>
     <form id="add-book-form">
       <div>
         <label for="book-title" class="form-label">Title</label>
@@ -31,4 +43,5 @@
   </main>
   <script src="javascripts/add-book.js" type="module"></script>
 </body>
+
 </html>
