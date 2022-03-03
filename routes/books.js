@@ -18,9 +18,26 @@ const books = [
   },
 ];
 
+let nextBookId = 3;
+let nextAuthorId = 3;
+
 // GET /books/ -> [ array of books ]
 router.get('/', (req, res) => {
   res.json(books);
+});
+
+router.post('/', (req, res) => {
+  // title, author, year, no ids
+  console.log('req.body:', req.body);
+  let bookProto = req.body;
+
+  bookProto.id = nextBookId + '';
+  bookProto.authorId = nextAuthorId + '';
+  nextBookId += 1;
+  nextAuthorId += 1;
+
+  books.push(bookProto);
+  res.json(bookProto);
 });
 
 router.get('/gatsby', (req, res) => {

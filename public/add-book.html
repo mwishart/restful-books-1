@@ -13,21 +13,22 @@
       <h1>Add a book</h1>
       <hr>
     </header>
-    <form>
+    <form id="add-book-form">
       <div>
         <label for="book-title" class="form-label">Title</label>
         <input type="text" name="title" id="book-title" class="form-control" required>
       </div>
-      <div>
+      <div class="mt-2">
         <label for="book-author" class="form-label">Author</label>
         <input type="text" name="author" id="book-author" class="form-control" required>
       </div>
-      <div>
+      <div class="mt-2">
         <label for="book-year" class="form-label">Year</label>
         <input type="number" name="year" id="book-year" class="form-control" required>
       </div>
-      <div><button type="submit" class="btn btn-primary">Add Book</button></div>
+      <div class="mt-2"><button type="submit" class="btn btn-primary">Add Book</button></div>
     </form>
   </main>
+  <script src="javascripts/add-book.js" type="module"></script>
 </body>
 </html>
