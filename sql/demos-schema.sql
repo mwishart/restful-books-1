@@ -28,7 +28,7 @@ INSERT INTO students (first_name, last_name, cohort, start_date, email, github_i
 INSERT INTO students (first_name, last_name, cohort, start_date, email, github_id, country) VALUES ("Caroline", "Manghan", 5,'2022-01-24', "Caroline_Manghan@tjx.com", "carolinemanghan", "USA");
 insert into students (first_name, last_name, country, github_id, cohort, start_date, email ) values ("Ambioris", "Lora", "US", "Siroibma", 5, NOW(), "superemail@gmail.com");
 insert into students (first_name, last_name, cohort, start_date, email, github_id, country) values ('Adam', 'Audet', 5, '2022-01-24', 'adam_audet@tjx.com', 'A313A206', 'US');
-INSERT INTO students (first_name, last_name, cohort, start_date, email, github_id, country) VALUES ("charlie", "nathan", 5, '2022-01-24' ,"charlie_nathan@tjxeurope.com","charlieNathan2","UK");
+INSERT INTO students (first_name, last_name, cohort, start_date, email, github_id, country) VALUES ("Joe", "Travers", 5, '2022-01-24' ,"joseph_travers@tjx.com","JoeTravers","USA");
 INSERT INTO students (first_name, last_name, cohort, email, start_date, github_id, country) VALUES("Mary", "Wishart", 5, "mary_wishart@tjx.com", "2022-01-24", "mwishart", "USA");
 insert into students (first_name, last_name, country, cohort, email, start_date, github_id) values ('Rahul' , 'Whig', 'UK', 5 ,'rahul_whig@tjxeurope.com','2022-01-24' , 'RahulWhigTJX' );
 INSERT INTO students (first_name,last_name,cohort,start_date,email,github_id, country)VALUES('Katrina','Wallace',5,'2022-01-24','katrina_wallace@tjx.com','katrina-wallace','USA');
@@ -41,3 +41,5 @@ insert into students (first_name, last_name, cohort, start_date, email, github_i
 INSERT INTO students (first_name, last_name, cohort, start_date, email, country) VALUES ('Chris', 'Gritter', 5, '2022-01-24', 'chris_gritter@tjxcanada.ca', 'Canada');
 INSERT INTO students (first_name, last_name, cohort, start_date, email, country) VALUES ('Brianna', 'Fahrenkopf', 5, '2022-01-24', 'brianna_fahrenkopf@tjx.com', 'US');
 INSERT INTO students (first_name,last_name,cohort,start_date,email,github_id,country)VALUES('Seena','Mathew',5,'2024-01-24','seena_mathew@tjxcanada.ca','SeenaRMathew','Canada');
+
+UPDATE students set country = 'USA' where country = 'US';
