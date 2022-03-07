@@ -13,7 +13,7 @@ create table demos.students (
   github_id varchar(100),
   country varchar(10) not null,
   student_id int not null auto_increment,
-  primary key(id)
+  primary key(student_id)
 );
 
 INSERT INTO students(first_name, last_name, cohort, start_date, email, github_id, country)  VALUES ('Chris', 'Zarba', 5 , '2022-01-24',"Christopher_Zarba@tjx.com", 'chriszarbatjx', 'USA');
