@@ -4,7 +4,7 @@ create schema demos;
 
 use demos;
 
-create table demos.students (
+create table students (
   first_name varchar(100) not null,
   last_name varchar(100) not null,
   cohort int,
