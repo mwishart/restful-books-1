@@ -15,9 +15,9 @@ async function fetchData(url) {
   try {
     let response = await fetch(url);
     // response.ok is true if response.statusCode >= 200 && <=400
+    // if (response.status >= 200 && response.status < 400) {
     if (response.ok) {
       let results = await response.json();
-      console.log('Got results:', results);
       renderTable(results);
     } else {
       console.log(`Could not find anything at ${url}`);
@@ -46,5 +46,3 @@ function renderTable(books) {
 }
 
 fetchData(restServer);
-
-export {};
