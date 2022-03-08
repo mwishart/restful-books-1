@@ -11,6 +11,7 @@ CREATE TABLE teams (
 );
 
 -- Bulk insert style
+-- Hard-coded ids to ensure we have the same values across forked repos
 INSERT INTO teams (team_id, team_name) 
   VALUES (1, 'Age of Empires'), 
          (2, 'Bloons'), 
@@ -93,19 +94,6 @@ UPDATE students
 UPDATE students
   SET teams_team_id = 5
   WHERE student_id IN (25, 22, 5, 15, 10);
-
-CREATE TABLE teams (
-  team_id int not null auto_increment,
-  team_name varchar(25),
-  CONSTRAINT PK_team_id primary key(team_id)
-);
-
--- Hard-coded ids to ensure we have the same values across forked repos
-INSERT INTO teams (team_id, team_name) VALUES (1, 'Age of Empires');
-INSERT INTO teams (team_id, team_name) VALUES (2, 'Bloons');
-INSERT INTO teams (team_id, team_name) VALUES (3, 'Civilization');
-INSERT INTO teams (team_id, team_name) VALUES (4, 'Halo');
-INSERT INTO teams (team_id, team_name) VALUES (5, 'Kingdom Hearts');
 
 CREATE TABLE teams_students (
   team_id int not null,
