@@ -42,3 +42,14 @@ INSERT INTO students (student_id, first_name, last_name, cohort, start_date, ema
 INSERT INTO students (student_id, first_name, last_name, cohort, start_date, email, github_id, country) VALUES (24, 'Seena', 'Mathew', 5, '2021-04-01', 'seena_mathew@tjxcanada.ca', 'SeenaRMathew', 'Canada');
 INSERT INTO students SET student_id = 25, first_name = 'Peter', last_name = 'Baker', cohort = 5, start_date = '2021-12-01', email = 'peter_baker@tjx.com', github_id = '55109380', country = 'USA';
 
+create table teams (
+  team_id int not null auto_increment,
+  team_name varchar(25),
+  constraint PK_team_id primary key(team_id);
+)
+
+INSERT INTO teams (team_id, team_name) VALUES (1, 'Age of Empires');
+INSERT INTO teams (team_id, team_name) VALUES (2, 'Bloons');
+INSERT INTO teams (team_id, team_name) VALUES (3, 'Civilization');
+INSERT INTO teams (team_id, team_name) VALUES (4, 'Halo');
+INSERT INTO teams (team_id, team_name) VALUES (5, 'Kingdom Hearts');
