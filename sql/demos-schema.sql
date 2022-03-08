@@ -4,6 +4,27 @@ create schema demos;
 
 use demos;
 
+create table teams (
+  team_id int not null auto_increment,
+  team_name varchar(25),
+  constraint PK_team_id primary key(team_id)
+);
+
+-- Bulk insert style
+INSERT INTO teams (team_id, team_name) 
+  VALUES (1, 'Age of Empires'), 
+         (2, 'Bloons'), 
+         (3, 'Civilization'), 
+         (4, 'Halo'), 
+         (5, 'Kingdom Hearts');
+
+-- Individual insert, use the above or this version
+-- INSERT INTO teams (team_id, team_name) VALUES (1, 'Age of Empires');
+-- INSERT INTO teams (team_id, team_name) VALUES (2, 'Bloons');
+-- INSERT INTO teams (team_id, team_name) VALUES (3, 'Civilization');
+-- INSERT INTO teams (team_id, team_name) VALUES (4, 'Halo');
+-- INSERT INTO teams (team_id, team_name) VALUES (5, 'Kingdom Hearts');
+
 create table students (
   first_name varchar(100) not null,
   last_name varchar(100) not null,
@@ -13,7 +34,10 @@ create table students (
   github_id varchar(100),
   country varchar(10) not null,
   student_id int not null auto_increment,
-  primary key(student_id)
+  constraint PK_students_student_id primary key(student_id)
+  -- If added originally
+  -- teams_team_id int,
+  -- constraint FK_teams_team_id foreign key (teams_team_id) references teams (team_id)
 );
 
 INSERT INTO students (student_id, first_name, last_name, cohort, grad_date, email, github_id, country)  VALUES (1, 'Chris', 'Zarba', 5 , '2021-05-01',"Christopher_Zarba@tjx.com", 'chriszarbatjx', 'USA');
@@ -42,3 +66,30 @@ INSERT INTO students (student_id, first_name, last_name, cohort, grad_date, emai
 INSERT INTO students (student_id, first_name, last_name, cohort, grad_date, email, github_id, country) VALUES (24, 'Seena', 'Mathew', 5, '2021-04-01', 'seena_mathew@tjxcanada.ca', 'SeenaRMathew', 'Canada');
 INSERT INTO students SET student_id = 25, first_name = 'Peter', last_name = 'Baker', cohort = 5, grad_date = '2021-12-01', email = 'peter_baker@tjx.com', github_id = '55109380', country = 'USA';
 
+-- As an alter table statement
+ALTER TABLE students
+  ADD teams_team_id int,
+  ADD constraint FK_teams_team_id 
+        FOREIGN KEY (teams_team_id) 
+        REFERENCES teams (team_id);
+
+-- Update students table to have team_ids
+UPDATE students
+  SET teams_team_id = 1
+  WHERE student_id in (16, 9, 13, 2, 14);
+
+UPDATE students
+  SET teams_team_id = 2
+  WHERE student_id in (4, 23, 1, 7, 24);
+
+UPDATE students
+  SET teams_team_id = 3
+  WHERE student_id in (3, 8, 18, 19, 20);
+
+UPDATE students
+  SET teams_team_id = 4
+  WHERE student_id in (11, 21, 6, 12, 17);
+
+UPDATE students
+  SET teams_team_id = 5
+  WHERE student_id in (25, 22, 5, 15, 10);
