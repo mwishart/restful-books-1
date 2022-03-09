@@ -2,7 +2,9 @@
   "name": "restful-books",
   "version": "0.0.0",
   "private": true,
-  "engines": {"node": ">=16"},
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www"
@@ -15,7 +17,9 @@
     "lodash-es": "^4.17.21",
     "lowdb": "^3.0.0",
     "morgan": "~1.9.1",
-    "nanoid": "^3.3.1"
+    "mysql2": "^2.3.3",
+    "nanoid": "^3.3.1",
+    "sequelize": "^6.17.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
