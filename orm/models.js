@@ -9,17 +9,19 @@ const Student = connection.define('Student', {
     cohort: DataTypes.INTEGER,
     grad_date: DataTypes.DATE,
     email: DataTypes.STRING,
-    github_id: DataTypes.STRING,
-    country: { type: DataTypes.STRING, allowNull: false},
-    student_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    }
-},
-    {underscored: true,
-    timestamps: false}
+    github_Id: DataTypes.STRING,
+    country: { type: DataTypes.STRING, allowNull: false },
+    studentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+  },
+  {
+    underscored: true,
+    timestamps: false,
+  }
 );
 
 const Team = connection.define(
@@ -41,4 +43,49 @@ const Team = connection.define(
   { tableName: 'teams', timestamps: false }
 );
 
-module.exports = { Student, Team };
+const TeamsStudents = connection.define(
+  'TeamsStudents',
+  {
+    teamId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Team,
+        key: 'teamId',
+      },
+    },
+    studentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Student,
+        key: 'studentId',
+      },
+    },
+    week: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    teamsStudentsId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+  },
+  {
+    underscored: true,
+    timestamps: false,
+  }
+);
+
+Student.belongsToMany(Team, {
+  through: { model: TeamsStudents },
+  foreignKey: 'studentId',
+});
+Team.belongsToMany(Student, {
+  through: { model: TeamsStudents },
+  foreignKey: 'teamId',
+});
+
+module.exports = { Student, Team, TeamsStudents };
