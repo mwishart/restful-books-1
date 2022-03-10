@@ -24,4 +24,23 @@ const Student = connection.define(
   }
 );
 
-module.exports = { Student };
+const Team = connection.define(
+  'Team',
+  {
+    teamId: {
+      field: 'team_id',
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    teamName: {
+      field: 'team_name',
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  { tableName: 'teams', timestamps: false }
+);
+
+module.exports = { Student, Team };
