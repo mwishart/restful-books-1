@@ -37,15 +37,4 @@ const { Student, Team, TeamsStudents } = require('./models');
   connection.close();
 })();
 
-(async function() { 
-    try{
-        let teams = await Teams.findAll();
-        for(let team of teams){
-            console.log(`${team.team_name}`);
 
-        }      
-}
-    catch(error){
-        console.error('Something went wrong with the database:', error);
-    }
-})(); 
