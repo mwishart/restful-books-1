@@ -12,8 +12,11 @@ const Teams = connection.define('Teams',{
     }
 
 },
-{underscored: true,
-    timestamps: false}); 
+    {underscored: true,
+    timestamps: false}
+); 
+
+
 const Student = connection.define('Student', {
     first_name: { type: DataTypes.STRING, allowNull: false},
     last_name: { type: DataTypes.STRING, allowNull: false},
@@ -29,7 +32,8 @@ const Student = connection.define('Student', {
         primaryKey: true
     }
 },
-{underscored: true,
-timestamps: false});
+    {underscored: true,
+    timestamps: false}
+);
 
 module.exports = {Student, Teams};
