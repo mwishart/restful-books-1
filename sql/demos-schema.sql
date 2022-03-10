@@ -121,3 +121,12 @@ INSERT INTO teams_students (team_id, week, student_id)
            (5, 1, 11), (5, 1, 8), (5, 1, 4), (5, 1, 15), (5, 1, 3), 
            (5, 2, 6), (5, 2, 1), (5, 2, 20), (5, 2, 2), (5, 2, 14), 
            (5, 3, 22), (5, 3, 5), (5, 3, 15), (5, 3, 25), (5, 3, 10);
+
+-- Handy view for querying students and teams
+CREATE VIEW vw_teams_students as 
+	SELECT ts.week, s.first_name, s.last_name, t.team_name, ts.student_id, ts.team_id
+	FROM demos.teams_students ts
+		INNER JOIN demos.students s
+			ON s.student_id = ts.student_id
+		INNER JOIN demos.teams t
+			ON t.team_id = ts.team_id;          
