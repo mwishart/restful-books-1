@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 const booksRouter = require('./routes/books');
+const authorsRouter = require('./routes/authors');
 
 var app = express();
 
@@ -20,6 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+// Step 2 (part of the URL is registered here, the rest in routes/books)
 app.use('/books', booksRouter);
+app.use('/authors', authorsRouter);
 
 module.exports = app;

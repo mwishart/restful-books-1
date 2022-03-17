@@ -1,32 +1,49 @@
 var express = require('express');
 var router = express.Router();
-let dao = {};
-
-(async () => {
-  const module = await import('../persistence/lowdb-persistence.mjs');
-  dao = module.dao;
-})();
+const { Book, Author } = require('../orm/books/books-models');
 
 // GET /books/ -> [ array of books ]
-router.get('/', (req, res) => {
-  res.json(dao.findBooks());
+router.get('/', async (req, res) => {
+  try {
+    let books = await Book.findAll({
+      include: { model: Author, as: 'author' },
+    });
+    res.json(books);
+  } catch (error) {
+    res.status(500).send('Book fetching failed');
+  }
 });
 
+// GET /books/:id -> matching book or 404
+router.get('/:id', async (req, res) => {
+  try {
+    let book = await Book.findByPk(req.params.id);
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).send(`Could not find book for id ${req.params.id}`);
+    }
+  } catch (error) {
+    res.status(500).send('Book fetching failed');
+  }
+});
+
+// Step 2, specifically answering on '/'
+// POST /books -> add a book
 router.post('/', async (req, res) => {
-  // title, author, year, no ids
-  console.log('req.body:', req.body);
-  let bookProto = req.body;
+  let protoBook = req.body;
 
-  let resultsBook = await dao.addBook(bookProto);
-  res.json(resultsBook);
-});
+  try {
+    // Security alert: not validating inputs!
+    // Steps 3-7 are right here, due to the configuration of Sequelize
+    // You can also look at orm/books/books-connection and orm/books/Book.js
+    let model = await Book.create(protoBook);
 
-router.get('/gatsby', (req, res) => {
-  res.send('The Great Gatsby');
-});
-
-router.get('/harry-potter', (req, res) => {
-  res.send('Harry Potter and the Chamber of Secrets');
+    // Step 8
+    res.status(201).json(model);
+  } catch (error) {
+    res.status(500).send('Book fetching failed');
+  }
 });
 
 module.exports = router;
