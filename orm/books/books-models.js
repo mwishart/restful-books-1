@@ -9,7 +9,7 @@ Author.hasMany(Book, {
 });
 
 Book.belongsTo(Author, {
-  constraints: false,
+  foreignKey: 'authorId',
 });
 
 Library.belongsTo(Address, { foreignKey: 'addressId' });
