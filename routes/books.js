@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const { Book } = require('../orm/books/books-models');
+const { Book, Author } = require('../orm/books/books-models');
 
 // GET /books/ -> [ array of books ]
 router.get('/', async (req, res) => {
   try {
-    let books = await Book.findAll();
+    let books = await Book.findAll({
+      include: { model: Author, as: 'author' },
+    });
     res.json(books);
   } catch (error) {
     res.status(500).send('Book fetching failed');

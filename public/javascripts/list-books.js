@@ -36,7 +36,7 @@ function renderTable(books) {
       `beforeend`,
       `
     <td>${book.title}</td>
-    <td>${book.author}</td>
+    <td>${book.author.commonName}</td>
     <td>${book.year}</td>
     `
     );
