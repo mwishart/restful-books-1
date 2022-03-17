@@ -26,9 +26,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Step 2, specifically answering on '/'
 // POST /books -> add a book
 router.post('/', async (req, res) => {
-  res.status(201).json({ id: 100, title: 'Not really' });
+  let protoBook = req.body;
+
+  try {
+    // Security alert: not validating inputs!
+    // Steps 3-7 are right here, due to the configuration of Sequelize
+    // You can also look at orm/books/books-connection and orm/books/Book.js
+    let model = await Book.create(protoBook);
+
+    // Step 8
+    res.status(201).json(model);
+  } catch (error) {
+    res.status(500).send('Book fetching failed');
+  }
 });
 
 module.exports = router;

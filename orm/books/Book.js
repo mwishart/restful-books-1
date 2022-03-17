@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const connection = require('./books-connection');
 const Author = require('./Author');
 
+// Steps 4-6 also occur here, because Sequelize does the hard work for us
 const Book = connection.define('book', {
   bookId: {
     type: DataTypes.INTEGER,

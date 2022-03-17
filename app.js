@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+// Step 2 (part of the URL is registered here, the rest in routes/books)
 app.use('/books', booksRouter);
 app.use('/authors', authorsRouter);
 
