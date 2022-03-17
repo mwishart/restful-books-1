@@ -125,6 +125,7 @@ INSERT INTO teams_students (team_id, week, student_id)
 -- Handy view for querying students and teams
 CREATE VIEW vw_teams_students as 
 	SELECT ts.week, s.first_name, s.last_name, t.team_name, ts.student_id, ts.team_id
+         CONCAT(s.first_name, ' ', s.last_name) as student_name
 	FROM demos.teams_students ts
 		INNER JOIN demos.students s
 			ON s.student_id = ts.student_id
