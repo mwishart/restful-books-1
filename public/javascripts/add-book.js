@@ -1,4 +1,18 @@
 import { restServer } from './config.js';
+
+// Fetch the authors list from ... the authors route!
+let authorsResponse = await fetch('/authors');
+let authors = await authorsResponse.json();
+let authorOptions = authors.map((author) => {
+  let option = document.createElement('option');
+  option.setAttribute('value', author.id);
+  option.textContent = author.commonName;
+  return option;
+});
+let selectList = document.querySelector('#book-author');
+selectList.replaceChildren(...authorOptions);
+selectList.disabled = false;
+
 let form = document.querySelector('#add-book-form');
 
 form.addEventListener('submit', (event) => {
