@@ -1,5 +1,5 @@
 const connection = require('./demos-connection');
-const { Student, Team, TeamsStudents } = require('./models');
+const { Student, Team, TeamsStudents } = require('./demos-models');
 
 // Immediately invoked function expression IIFE (iffy)
 (async function () {
