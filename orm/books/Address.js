@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const connection = require('./books-connection');
 
-const Address = connection.define('Address', {
+const Address = connection.define('address', {
   addressId: {
     type: DataTypes.INTEGER,
     allowNull: false,

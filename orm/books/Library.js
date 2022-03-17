@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const connection = require('./books-connection');
 const Address = require('./Address');
 
-const Library = connection.define('Library', {
+const Library = connection.define('library', {
   libraryId: {
     type: DataTypes.INTEGER,
     allowNull: false,

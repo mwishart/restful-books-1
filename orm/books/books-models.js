@@ -12,8 +12,8 @@ Book.belongsTo(Author, {
   constraints: false,
 });
 
-Library.hasOne(Address, { constraints: false });
-Address.belongsTo(Library, { constraints: false });
+Library.belongsTo(Address, { foreignKey: 'addressId' });
+Address.hasOne(Library, { foreignKey: 'addressId' });
 
 Library.belongsToMany(Book, {
   through: { model: LibraryInventory },
