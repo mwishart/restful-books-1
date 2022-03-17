@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Author, Book } = require('../orm/books/books-models');
+const { Author, Book, Library } = require('../orm/books/books-models');
 const expect = require('chai').expect;
 
 describe('Book Model', () => {
@@ -20,7 +20,7 @@ describe('Book Model', () => {
     expect(books).to.have.lengthOf.at.least(2);
   });
 
-  it('Check associations lazily', async () => {
+  it('Check Author associations lazily', async () => {
     let testTitle = 'A Savage Place';
     let book = await Book.findOne({
       logging: false,
@@ -33,7 +33,7 @@ describe('Book Model', () => {
     expect(author.lastName).to.equal('Parker');
   });
 
-  it('Check associations eagerly', async () => {
+  it('Check Author associations eagerly', async () => {
     let testTitle = 'A Savage Place';
     let book = await Book.findOne({
       logging: false,
@@ -44,5 +44,31 @@ describe('Book Model', () => {
     });
     expect(book.author).to.exist;
     expect(book.author.lastName).to.equal('Parker');
+  });
+
+  it('Check Library associations lazily', async () => {
+    let testTitle = 'A Savage Place';
+    let book = await Book.findOne({
+      logging: false,
+      where: {
+        title: testTitle,
+      },
+    });
+    expect(book.getLibraries).to.exist;
+    let libraries = await book.getLibraries({ logging: false });
+    expect(libraries).to.have.lengthOf.at.least(2);
+  });
+
+  it('Check Library associations eagerly', async () => {
+    let testTitle = 'A Savage Place';
+    let book = await Book.findOne({
+      logging: false,
+      where: {
+        title: testTitle,
+      },
+      include: Library,
+    });
+    expect(book.libraries).to.exist;
+    expect(book.libraries).to.have.lengthOf.at.least(2);
   });
 });

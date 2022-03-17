@@ -18,6 +18,7 @@ Address.hasOne(Library, { foreignKey: 'addressId' });
 Library.belongsToMany(Book, {
   through: { model: LibraryInventory },
   foreignKey: 'libraryId',
+  as: 'inventory',
 });
 Book.belongsToMany(Library, {
   through: { model: LibraryInventory },
@@ -29,5 +30,5 @@ module.exports = {
   Author,
   Book,
   Library,
-  // LibraryInventory,
+  LibraryInventory,
 };

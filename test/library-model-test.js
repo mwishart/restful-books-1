@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Address, Library } = require('../orm/books/books-models');
+const { Address, Library, Book } = require('../orm/books/books-models');
 const expect = require('chai').expect;
 
 describe('Library Model', () => {
@@ -16,20 +16,20 @@ describe('Library Model', () => {
     expect(nutleyLibrary).to.exist;
   });
 
-  it('Check associations lazily', async () => {
+  it('Check Address association lazily', async () => {
     let nutleyLibrary = await Library.findOne({
       logging: false,
       where: { name: { [Op.substring]: 'Nutley' } },
     });
     expect(nutleyLibrary.getAddress).to.exist;
-    let nutleyLibraryAddress = await nutleyLibrary.getAddress({
+    let nutleyLibraryInventory = await nutleyLibrary.getAddress({
       logging: false,
     });
-    expect(nutleyLibraryAddress).to.exist;
-    expect(nutleyLibraryAddress.province).to.equal('NJ');
+    expect(nutleyLibraryInventory).to.exist;
+    expect(nutleyLibraryInventory.province).to.equal('NJ');
   });
 
-  it('Check associations eagerly', async () => {
+  it('Check Address association eagerly', async () => {
     let nutleyLibrary = await Library.findOne({
       logging: false,
       where: { name: { [Op.substring]: 'Nutley' } },
@@ -37,5 +37,28 @@ describe('Library Model', () => {
     });
     expect(nutleyLibrary.address).to.exist;
     expect(nutleyLibrary.address.province).to.equal('NJ');
+  });
+
+  it('Check Books association lazily', async () => {
+    let nutleyLibrary = await Library.findOne({
+      logging: false,
+      where: { name: { [Op.substring]: 'Nutley' } },
+    });
+    expect(nutleyLibrary.getInventory).to.exist;
+    let nutleyLibraryInventory = await nutleyLibrary.getInventory({
+      logging: false,
+    });
+    expect(nutleyLibraryInventory).to.exist;
+    expect(nutleyLibraryInventory).to.have.lengthOf.at.least(2);
+  });
+
+  it('Check Books association eagerly', async () => {
+    let nutleyLibrary = await Library.findOne({
+      logging: false,
+      where: { name: { [Op.substring]: 'Nutley' } },
+      include: { model: Book, as: 'inventory' },
+    });
+    expect(nutleyLibrary.inventory).to.exist;
+    expect(nutleyLibrary.inventory).to.have.lengthOf.at.least(2);
   });
 });
